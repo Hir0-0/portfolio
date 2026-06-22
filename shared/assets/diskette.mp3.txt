@@ -1,0 +1,1 @@
+Placeholder — substitua por um MP3 real de som de disquete. O loading tem fallback via Web Audio.

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ title or "Diário" }} · Portfolio</title>
+  <meta name="description" content="{{ description or 'Moleskine digital — anotações, processos e fragmentos.' }}" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Science+Gothic:opsz,wdth,wght@8..144,25..151,100..900&family=JetBrains+Mono:wght@400;700&display=swap" />
+  <link rel="stylesheet" href="../shared/css/theme.css" />
+  <link rel="stylesheet" href="../shared/css/base.css" />
+  <link rel="stylesheet" href="../shared/css/loading.css" />
+  <link rel="stylesheet" href="../shared/css/terminal.css" />
+  <link rel="stylesheet" href="../shared/css/layout.css" />
+  <style>
+    .diario-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+      padding: 1.5rem;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .diario-card {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      padding: 1.2rem;
+      display: flex; flex-direction: column; gap: 0.6rem;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .diario-card:hover { transform: translate(-3px,-3px); box-shadow: 5px 5px 0 var(--accent); border-color: var(--accent); }
+    .diario-card h3 { margin: 0; color: var(--fg); }
+    .diario-card .date { font-size: 0.75rem; letter-spacing: 0.15em; color: var(--accent); font-family: "JetBrains Mono", monospace; }
+    .diario-card .tags { font-size: 0.7rem; color: var(--fg-soft); text-transform: uppercase; letter-spacing: 0.1em; }
+    .diario-post { max-width: 720px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+    .diario-post h1 { margin-bottom: 0.2rem; }
+    .diario-post .date { font-family: "JetBrains Mono", monospace; color: var(--accent); letter-spacing: 0.15em; font-size: 0.8rem; }
+    .diario-post img, .diario-post video { margin: 1.5rem 0; border: 1px solid var(--border); }
+    .diario-post blockquote { border-left: 3px solid var(--warn); padding: 0.4rem 1rem; color: var(--fg-soft); font-style: italic; }
+    .diario-post pre { background: var(--bg-soft); padding: 1rem; overflow: auto; font-family: "JetBrains Mono", monospace; font-size: 0.85rem; }
+  </style>
+  <script src="../shared/js/utils.js"></script>
+  <script src="../shared/js/loading.js"></script>
+  <script src="../shared/js/theme-toggle.js" defer></script>
+  <script src="../shared/js/menu.js" defer></script>
+  <script src="../shared/js/background-2d.js" defer></script>
+  <script src="../shared/js/background-3d.js" defer></script>
+  <script src="../shared/js/background-switch.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-logo" href="../index.html">// PORT<span>FOLIO</span>_</a>
+    <button class="nav-toggle" aria-label="Abrir menu">≡</button>
+    <nav class="site-nav">
+      <a href="../index.html">Home</a>
+      <a href="../galeria.html">Galeria</a>
+      <a href="../beats.html">Beats</a>
+      <a href="../prototipos.html">Protótipos</a>
+      <a href="../consultoria.html">Serviços</a>
+      <a href="./">Diário</a>
+    </nav>
+  </header>
+
+  <main>
+    {{ content | safe }}
+  </main>
+
+  <footer class="site-footer"><p>© diário · moleskine digital</p></footer>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Serviços · Portfolio</title>
+  <meta name="description" content="Consultoria de marketing e encomendas de ilustração." />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Science+Gothic:opsz,wdth,wght@8..144,25..151,100..900&family=JetBrains+Mono:wght@400;700&display=swap" />
+  <link rel="stylesheet" href="shared/css/theme.css" />
+  <link rel="stylesheet" href="shared/css/base.css" />
+  <link rel="stylesheet" href="shared/css/loading.css" />
+  <link rel="stylesheet" href="shared/css/terminal.css" />
+  <link rel="stylesheet" href="shared/css/layout.css" />
+  <script src="shared/js/utils.js"></script>
+  <script src="shared/js/loading.js"></script>
+  <script src="shared/js/theme-toggle.js" defer></script>
+  <script src="shared/js/menu.js" defer></script>
+  <script src="shared/js/background-2d.js" defer></script>
+  <script src="shared/js/background-3d.js" defer></script>
+  <script src="shared/js/background-switch.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-logo" href="index.html">// PORT<span>FOLIO</span>_</a>
+    <button class="nav-toggle" aria-label="Abrir menu">≡</button>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="galeria.html">Galeria</a>
+      <a href="beats.html">Beats</a>
+      <a href="prototipos.html">Protótipos</a>
+      <a href="consultoria.html">Serviços</a>
+      <a href="diario/">Diário</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <h1>Serviços</h1>
+        <p>Consultoria de marketing e encomendas de ilustração. Tom profissional, com pitada experimental.</p>
+      </div>
+    </section>
+
+    <section class="svc-section" id="servicos">
+      <h2>O que ofereço</h2>
+      <div class="svc-grid" id="svc-grid"></div>
+    </section>
+
+    <section class="svc-section" id="cases">
+      <h2>Cases</h2>
+      <div class="svc-grid" id="cases-grid"></div>
+    </section>
+
+    <section class="svc-section" id="contato">
+      <h2>Contato</h2>
+      <form class="contact-form" action="TODO_FORMSPREE_URL" method="POST">
+        <input name="name" placeholder="Seu nome" required />
+        <input name="email" type="email" placeholder="E-mail" required />
+        <input name="subject" placeholder="Assunto" />
+        <textarea name="message" placeholder="Conte-me sobre o projeto" required></textarea>
+        <button class="btn btn--primary" type="submit">Enviar →</button>
+      </form>
+      <div class="socials">
+        <a href="#" target="_blank" rel="noopener">Instagram</a>
+        <a href="#" target="_blank" rel="noopener">Behance</a>
+        <a href="#" target="_blank" rel="noopener">GitHub</a>
+        <a href="#" target="_blank" rel="noopener">SoundCloud</a>
+        <a href="mailto:hello@exemplo.com">E-mail</a>
+      </div>
+    </section>
+  </main>
+
+  <div class="modal" id="modal" aria-hidden="true">
+    <div class="modal__box">
+      <button class="modal__close" aria-label="Fechar">×</button>
+      <h2 id="m-title"></h2>
+      <p class="mono" id="m-meta"></p>
+      <div id="m-body"></div>
+    </div>
+  </div>
+
+<script>
+const SERVICES = [
+  { title:"Consultoria de marketing", meta:"estratégia · branding", body:"Diagnóstico, posicionamento e plano editorial para marcas criativas. Sessões quinzenais." },
+  { title:"Ilustração sob encomenda", meta:"editorial · personagem", body:"Capas, retratos, mascotes. Pacotes a partir de 1 peça finalizada com 2 rodadas de revisão." },
+  { title:"Identidade visual",        meta:"logo · sistema",       body:"Marca + mini manual + aplicações principais." },
+  { title:"Trilha & sound design",    meta:"audio · loops",        body:"Beats, loops e identidade sonora para vídeos curtos e apps." }
+];
+const CASES = [
+  { title:"Este portfólio", meta:"design · código",   body:"O próprio site que você está navegando: HTML/CSS/JS puros, Three.js, 11ty. Estética construtivista com modo terminal." },
+  { title:"Caso B (placeholder)", meta:"branding", body:"Substitua por um case real." },
+  { title:"Caso C (placeholder)", meta:"editorial", body:"Substitua por um case real." }
+];
+
+const sg = document.getElementById("svc-grid");
+const cg = document.getElementById("cases-grid");
+const modal = document.getElementById("modal");
+
+function card(it) {
+  const el = document.createElement("article");
+  el.className = "svc-card";
+  el.innerHTML = `<h3>${it.title}</h3><p>${it.meta}</p>`;
+  el.onclick = () => open(it);
+  return el;
+}
+SERVICES.forEach(s => sg.appendChild(card(s)));
+CASES.forEach(c => cg.appendChild(card(c)));
+
+function open(it) {
+  document.getElementById("m-title").textContent = it.title;
+  document.getElementById("m-meta").textContent = "> " + it.meta;
+  document.getElementById("m-body").innerHTML = `<p>${it.body}</p>`;
+  modal.classList.add("is-open");
+}
+modal.addEventListener("click", e => {
+  if (e.target === modal || e.target.classList.contains("modal__close")) modal.classList.remove("is-open");
+});
+</script>
+</body>
+</html>

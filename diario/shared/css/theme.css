@@ -1,0 +1,111 @@
+/* =========================================================
+   theme.css — tokens claros e escuros (terminal)
+   Paleta:
+   #54D930 verde terminal | #F2E8D5 creme | #04B2D9 azul
+   #05AFF2 azul claro    | #F2A03D laranja | #F25430 vermelho
+   ========================================================= */
+
+:root {
+  /* Paleta crua */
+  --c-green:   #54D930;
+  --c-cream:   #F2E8D5;
+  --c-blue:    #04B2D9;
+  --c-blue-2:  #05AFF2;
+  --c-orange:  #F2A03D;
+  --c-red:     #F25430;
+  --c-dark:    #0a0d0a;
+  --c-dark-2:  #11150f;
+
+  /* Tema claro (padrão) */
+  --bg:        var(--c-cream);
+  --bg-soft:   #ece1c6;
+  --fg:        #1a1d18;
+  --fg-soft:   #4a4d46;
+  --accent:    var(--c-blue);
+  --accent-2:  var(--c-blue-2);
+  --warn:      var(--c-orange);
+  --danger:    var(--c-red);
+  --border:    rgba(26,29,24,0.18);
+  --panel:     rgba(255,255,255,0.55);
+  --panel-strong: #ffffff;
+  --shadow:    0 8px 32px rgba(26,29,24,0.08);
+  --terminal-fg: var(--c-blue);
+}
+
+[data-theme="dark"] {
+  --bg:        var(--c-dark);
+  --bg-soft:   var(--c-dark-2);
+  --fg:        var(--c-green);
+  --fg-soft:   #8fce7f;
+  --accent:    var(--c-blue-2);
+  --accent-2:  var(--c-cream);
+  --warn:      var(--c-orange);
+  --danger:    var(--c-red);
+  --border:    rgba(84,217,48,0.25);
+  --panel:     rgba(10,13,10,0.7);
+  --panel-strong: #0a0d0a;
+  --shadow:    0 8px 32px rgba(0,0,0,0.6);
+  --terminal-fg: var(--c-green);
+}
+
+/* Botões base */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.4rem;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  background: transparent;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+  position: relative;
+}
+.btn:hover {
+  background: var(--accent);
+  color: var(--bg);
+  transform: translate(-2px,-2px);
+  box-shadow: 4px 4px 0 var(--fg);
+}
+.btn--primary {
+  background: var(--accent);
+  color: var(--bg);
+}
+.btn--primary:hover {
+  background: var(--accent-2);
+  border-color: var(--accent-2);
+}
+.btn--warn {
+  border-color: var(--warn);
+  color: var(--warn);
+}
+.btn--warn:hover { background: var(--warn); color: var(--bg); }
+
+/* Painéis com vidro/terminal */
+.panel {
+  background: var(--panel);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+}
+
+/* Toggle de tema */
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 50;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--fg);
+  backdrop-filter: blur(6px);
+  font-family: "JetBrains Mono", "Science Gothic", monospace;
+}
+.theme-toggle:hover { border-color: var(--accent); color: var(--accent); }

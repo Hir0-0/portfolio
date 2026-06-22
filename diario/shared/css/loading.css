@@ -1,0 +1,106 @@
+/* =========================================================
+   loading.css — tela de loading terminal
+   ========================================================= */
+
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--c-dark);
+  color: var(--c-green);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "JetBrains Mono", "Science Gothic", monospace;
+  padding: 2rem;
+  transition: opacity 0.6s ease;
+}
+
+.loading-screen.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-ascii {
+  white-space: pre;
+  font-size: clamp(0.55rem, 1.1vw, 0.85rem);
+  line-height: 1.1;
+  color: var(--c-green);
+  text-shadow: 0 0 8px rgba(84,217,48,0.5);
+  margin-bottom: 2rem;
+}
+
+.loading-text {
+  font-size: 0.95rem;
+  letter-spacing: 0.2em;
+  color: var(--c-cream);
+  margin-bottom: 1.5rem;
+}
+.loading-cursor {
+  display: inline-block;
+  width: 10px;
+  background: var(--c-green);
+  margin-left: 4px;
+  animation: blink 0.9s steps(2) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+.loading-bar {
+  width: min(420px, 80vw);
+  height: 18px;
+  border: 2px solid var(--c-green);
+  position: relative;
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+}
+.loading-bar__chunk {
+  flex: 1;
+  background: transparent;
+  transition: background 0.05s linear;
+}
+.loading-bar__chunk.is-on {
+  background: var(--c-green);
+  box-shadow: 0 0 6px rgba(84,217,48,0.6);
+}
+
+.loading-meta {
+  margin-top: 1.25rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  color: var(--c-blue-2);
+  display: flex;
+  gap: 1rem;
+  text-transform: uppercase;
+}
+
+.loading-mute {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  border: 1px solid var(--c-green);
+  color: var(--c-green);
+  padding: 0.35rem 0.7rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  background: transparent;
+  font-family: inherit;
+}
+.loading-mute:hover { background: var(--c-green); color: var(--c-dark); }
+
+/* Scanlines decoração */
+.loading-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 3px,
+    rgba(0,0,0,0.18) 3px,
+    rgba(0,0,0,0.18) 4px
+  );
+  mix-blend-mode: multiply;
+}

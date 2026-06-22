@@ -1,0 +1,45 @@
+/* =========================================================
+   terminal.css — estética CRT/scanlines (modo escuro forte)
+   ========================================================= */
+
+[data-theme="dark"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 30;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 3px,
+    rgba(0,0,0,0.18) 3px,
+    rgba(0,0,0,0.18) 4px
+  );
+  mix-blend-mode: multiply;
+  opacity: 0.55;
+}
+
+[data-theme="dark"] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 31;
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.55) 100%);
+}
+
+[data-theme="dark"] .hero__title { text-shadow: 0 0 18px rgba(84,217,48,0.3); }
+[data-theme="dark"] .site-logo { color: var(--c-green); }
+[data-theme="dark"] .site-logo span { color: var(--c-cream); }
+
+/* Texto terminal/mono helper */
+.mono {
+  font-family: "JetBrains Mono", "Science Gothic", monospace;
+  letter-spacing: 0.05em;
+}
+
+/* "Prompt" decorativo */
+.prompt::before {
+  content: "> ";
+  color: var(--accent);
+}

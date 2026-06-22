@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Galeria · Portfolio</title>
+  <meta name="description" content="Galeria de ilustrações, sketches e animações." />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Science+Gothic:opsz,wdth,wght@8..144,25..151,100..900&family=JetBrains+Mono:wght@400;700&display=swap" />
+  <link rel="stylesheet" href="shared/css/theme.css" />
+  <link rel="stylesheet" href="shared/css/base.css" />
+  <link rel="stylesheet" href="shared/css/loading.css" />
+  <link rel="stylesheet" href="shared/css/terminal.css" />
+  <link rel="stylesheet" href="shared/css/layout.css" />
+  <script src="shared/js/utils.js"></script>
+  <script src="shared/js/loading.js"></script>
+  <script src="shared/js/theme-toggle.js" defer></script>
+  <script src="shared/js/menu.js" defer></script>
+  <script src="shared/js/background-2d.js" defer></script>
+  <script src="shared/js/background-3d.js" defer></script>
+  <script src="shared/js/background-switch.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-logo" href="index.html">// PORT<span>FOLIO</span>_</a>
+    <button class="nav-toggle" aria-label="Abrir menu">≡</button>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="galeria.html">Galeria</a>
+      <a href="beats.html">Beats</a>
+      <a href="prototipos.html">Protótipos</a>
+      <a href="consultoria.html">Serviços</a>
+      <a href="diario/">Diário</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <h1>Galeria</h1>
+        <p>Ilustrações, sketches, personagens e experimentos em movimento.</p>
+      </div>
+    </section>
+
+    <div class="gallery-filters" id="filters">
+      <button class="is-active" data-cat="all">Todos</button>
+      <button data-cat="digital">Digital</button>
+      <button data-cat="sketch">Sketch</button>
+      <button data-cat="personagem">Personagem</button>
+      <button data-cat="motion">Motion</button>
+    </div>
+
+    <div class="masonry" id="masonry"></div>
+    <div class="pagination" id="pagination"></div>
+  </main>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox__close" aria-label="Fechar">×</button>
+    <div class="lightbox__content">
+      <div class="lightbox__media" id="lb-media"></div>
+      <aside class="lightbox__info">
+        <h2 id="lb-title"></h2>
+        <p class="mono" id="lb-cat"></p>
+        <p id="lb-desc"></p>
+        <h3>Processo criativo</h3>
+        <p id="lb-process"></p>
+      </aside>
+    </div>
+  </div>
+
+  <footer class="site-footer"><p>© ateliê digital</p></footer>
+
+<script>
+// Placeholders — substitua por arquivos reais em /galeria/categorias/
+const ITEMS = [
+  { src:"https://picsum.photos/seed/a/600/800", cat:"digital", title:"Composição #01", desc:"Estudo de cor em CMYK.", process:"Pintura digital em camadas com paleta restrita." },
+  { src:"https://picsum.photos/seed/b/600/420", cat:"sketch", title:"Gesto rápido", desc:"Sketchbook de café.", process:"5 min, bic azul, papel pardo." },
+  { src:"https://picsum.photos/seed/c/600/600", cat:"personagem", title:"Garoto-rádio", desc:"Personagem para zine.", process:"Lápis 2B + finalização vetorial." },
+  { src:"https://picsum.photos/seed/d/600/900", cat:"digital", title:"Néon construtivo", desc:"Cartaz fictício.", process:"Grid 8 col, tipografia variável." },
+  { src:"https://picsum.photos/seed/e/600/520", cat:"sketch", title:"Estudo de mão", desc:"Anatomia.", process:"Referência fotográfica + memória." },
+  { src:"https://picsum.photos/seed/f/600/720", cat:"personagem", title:"Fada-modem", desc:"Concept art.", process:"Iteração rápida em silhuetas." },
+  { src:"https://picsum.photos/seed/g/600/400", cat:"motion", title:"Loop CMYK", desc:"Animação curta em loop.", process:"12 frames, after effects + posterize." },
+  { src:"https://picsum.photos/seed/h/600/600", cat:"digital", title:"Retícula", desc:"Experimento com half-tone.", process:"Filtro custom + máscara de cor." },
+  { src:"https://picsum.photos/seed/i/600/820", cat:"personagem", title:"Operadora", desc:"Personagem para HQ.", process:"Pose dinâmica + paleta limitada." },
+  { src:"https://picsum.photos/seed/j/600/500", cat:"sketch", title:"Paisagem urbana", desc:"Plein air digital.", process:"30 min observando da janela." },
+  { src:"https://picsum.photos/seed/k/600/680", cat:"digital", title:"Geometria mole", desc:"Forma orgânica em SVG.", process:"Bezier exportado e tratado." },
+  { src:"https://picsum.photos/seed/l/600/600", cat:"motion", title:"Glitch suave", desc:"Loop hipnótico.", process:"Datamoshing controlado." }
+];
+const PER_PAGE = 8;
+let curCat = "all", curPage = 1;
+
+const grid = document.getElementById("masonry");
+const pag = document.getElementById("pagination");
+
+function render() {
+  const list = ITEMS.filter(i => curCat === "all" || i.cat === curCat);
+  const pages = Math.max(1, Math.ceil(list.length / PER_PAGE));
+  if (curPage > pages) curPage = 1;
+  const slice = list.slice((curPage-1)*PER_PAGE, curPage*PER_PAGE);
+  grid.innerHTML = slice.map((it, idx) => `
+    <figure class="masonry__item" data-idx="${ITEMS.indexOf(it)}">
+      ${it.src.endsWith(".mp4")
+        ? `<video src="${it.src}" muted loop autoplay playsinline></video>`
+        : `<img src="${it.src}" alt="${it.title}" loading="lazy" />`}
+      <figcaption class="meta">${it.title} · ${it.cat}</figcaption>
+    </figure>`).join("");
+
+  pag.innerHTML = "";
+  for (let i = 1; i <= pages; i++) {
+    const b = document.createElement("button");
+    b.textContent = i; if (i === curPage) b.classList.add("is-active");
+    b.onclick = () => { curPage = i; render(); window.scrollTo({top:0,behavior:"smooth"}); };
+    pag.appendChild(b);
+  }
+}
+document.getElementById("filters").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  document.querySelectorAll("#filters button").forEach(x => x.classList.remove("is-active"));
+  b.classList.add("is-active");
+  curCat = b.dataset.cat; curPage = 1; render();
+});
+
+// Lightbox
+const lb = document.getElementById("lightbox");
+grid.addEventListener("click", e => {
+  const fig = e.target.closest(".masonry__item"); if (!fig) return;
+  const it = ITEMS[+fig.dataset.idx];
+  document.getElementById("lb-media").innerHTML = it.src.endsWith(".mp4")
+    ? `<video src="${it.src}" controls autoplay></video>`
+    : `<img src="${it.src}" alt="${it.title}" />`;
+  document.getElementById("lb-title").textContent = it.title;
+  document.getElementById("lb-cat").textContent = "> " + it.cat;
+  document.getElementById("lb-desc").textContent = it.desc;
+  document.getElementById("lb-process").textContent = it.process;
+  lb.classList.add("is-open");
+});
+lb.addEventListener("click", e => {
+  if (e.target === lb || e.target.classList.contains("lightbox__close")) {
+    lb.classList.remove("is-open");
+    document.getElementById("lb-media").innerHTML = "";
+  }
+});
+
+render();
+</script>
+</body>
+</html>

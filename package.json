@@ -1,0 +1,14 @@
+{
+  "name": "portfolio-diario-criativo",
+  "version": "1.0.0",
+  "description": "Portfolio + Diario criativo estatico para GitHub Pages",
+  "scripts": {
+    "dev": "npx --yes http-server -p 8080 -c-1 -s .",
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "start": "npx --yes http-server -p 8080 -c-1 -s ."
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  }
+}

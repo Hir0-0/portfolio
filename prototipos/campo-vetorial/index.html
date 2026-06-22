@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <title>Campo vetorial — demo</title>
+  <style>
+    html,body{margin:0;background:#0a0d0a;color:#54D930;font-family:monospace;height:100%;overflow:hidden}
+    canvas{display:block}
+    .lbl{position:fixed;top:8px;left:10px;font-size:11px;letter-spacing:.2em;opacity:.7}
+  </style>
+</head>
+<body>
+  <canvas id="c"></canvas>
+  <div class="lbl">&gt; CAMPO_VETORIAL // PLACEHOLDER</div>
+<script>
+const c = document.getElementById("c"), x = c.getContext("2d");
+function R(){c.width=innerWidth;c.height=innerHeight}R();onresize=R;
+const ps = Array.from({length:300},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight}));
+let t=0;
+function f(px,py){const a=Math.sin(px*0.005+t)+Math.cos(py*0.005-t);return a*Math.PI;}
+function loop(){
+  t+=0.005;
+  x.fillStyle="rgba(10,13,10,0.08)";x.fillRect(0,0,c.width,c.height);
+  x.fillStyle="#54D930";
+  for(const p of ps){
+    const a=f(p.x,p.y);
+    p.x+=Math.cos(a);p.y+=Math.sin(a);
+    if(p.x<0)p.x=c.width;if(p.x>c.width)p.x=0;
+    if(p.y<0)p.y=c.height;if(p.y>c.height)p.y=0;
+    x.fillRect(p.x,p.y,1,1);
+  }
+  requestAnimationFrame(loop);
+}
+loop();
+</script>
+</body>
+</html>

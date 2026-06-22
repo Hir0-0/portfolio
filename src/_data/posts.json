@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Primeiro post",
+    "slug": "primeiro-post",
+    "date": "2026-06-22",
+    "tags": ["abertura", "manifesto"],
+    "cover": "../shared/assets/logo.png"
+  },
+  {
+    "title": "Cadernos de campo",
+    "slug": "cadernos-de-campo",
+    "date": "2026-06-15",
+    "tags": ["sketch", "processo"],
+    "cover": ""
+  }
+]

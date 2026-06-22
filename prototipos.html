@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Protótipos · Portfolio</title>
+  <meta name="description" content="Experimentos em p5.js, Three.js e HTML/CSS/JS." />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Science+Gothic:opsz,wdth,wght@8..144,25..151,100..900&family=JetBrains+Mono:wght@400;700&display=swap" />
+  <link rel="stylesheet" href="shared/css/theme.css" />
+  <link rel="stylesheet" href="shared/css/base.css" />
+  <link rel="stylesheet" href="shared/css/loading.css" />
+  <link rel="stylesheet" href="shared/css/terminal.css" />
+  <link rel="stylesheet" href="shared/css/layout.css" />
+  <script src="shared/js/utils.js"></script>
+  <script src="shared/js/loading.js"></script>
+  <script src="shared/js/theme-toggle.js" defer></script>
+  <script src="shared/js/menu.js" defer></script>
+  <script src="shared/js/background-2d.js" defer></script>
+  <script src="shared/js/background-3d.js" defer></script>
+  <script src="shared/js/background-switch.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-logo" href="index.html">// PORT<span>FOLIO</span>_</a>
+    <button class="nav-toggle" aria-label="Abrir menu">≡</button>
+    <nav class="site-nav">
+      <a href="index.html">Home</a>
+      <a href="galeria.html">Galeria</a>
+      <a href="beats.html">Beats</a>
+      <a href="prototipos.html">Protótipos</a>
+      <a href="consultoria.html">Serviços</a>
+      <a href="diario/">Diário</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-header">
+      <div class="container">
+        <h1>Protótipos</h1>
+        <p>Experimentos interativos. Cada projeto roda direto no navegador.</p>
+      </div>
+    </section>
+
+    <div class="proto-layout">
+      <aside class="proto-list" id="proto-list"></aside>
+      <div>
+        <div class="proto-stage">
+          <iframe id="proto-iframe" title="Demo" sandbox="allow-scripts allow-same-origin allow-pointer-lock"></iframe>
+        </div>
+        <div class="proto-meta">
+          <h2 id="proto-title"></h2>
+          <p class="mono" id="proto-tags"></p>
+          <p id="proto-desc"></p>
+          <a id="proto-gh" class="btn" target="_blank" rel="noopener">GitHub →</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+<script>
+// Cada protótipo deve viver em /prototipos/<slug>/index.html
+const PROTOS = [
+  { slug:"campo-vetorial",  title:"Campo vetorial p5.js", tags:"p5.js · canvas",       desc:"Partículas seguindo um campo de fluxo Perlin.", gh:"https://github.com/" },
+  { slug:"sphere-glitch",   title:"Esfera glitch",        tags:"three.js · shader",    desc:"IcosaSfera com deformação no fragment shader.", gh:"https://github.com/" },
+  { slug:"typo-construct",  title:"Tipografia construct", tags:"html · css · js",      desc:"Sistema de poster generativo construtivista.",  gh:"https://github.com/" },
+  { slug:"audio-bars",      title:"Audio bars",           tags:"web audio · canvas",   desc:"Visualização FFT reativa a microfone.",         gh:"https://github.com/" }
+];
+
+const list = document.getElementById("proto-list");
+const frame = document.getElementById("proto-iframe");
+
+function select(i) {
+  document.querySelectorAll("#proto-list button").forEach((b, j) => b.classList.toggle("is-active", i === j));
+  const p = PROTOS[i];
+  // Carrega a demo (cria stub se a pasta ainda não existir)
+  frame.src = `prototipos/${p.slug}/index.html`;
+  document.getElementById("proto-title").textContent = p.title;
+  document.getElementById("proto-tags").textContent = "> " + p.tags;
+  document.getElementById("proto-desc").textContent = p.desc;
+  document.getElementById("proto-gh").href = p.gh;
+}
+PROTOS.forEach((p, i) => {
+  const b = document.createElement("button");
+  b.textContent = p.title;
+  b.onclick = () => select(i);
+  list.appendChild(b);
+});
+select(0);
+</script>
+</body>
+</html>

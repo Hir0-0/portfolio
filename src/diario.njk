@@ -1,0 +1,23 @@
+---
+layout: base.njk
+title: Diário
+permalink: /index.html
+---
+
+<section class="page-header">
+  <div class="container">
+    <h1>Diário</h1>
+    <p>Moleskine digital — anotações de processo, sketches, fragmentos sonoros e divagações.</p>
+  </div>
+</section>
+
+<div class="diario-grid">
+  {% for post in collections.post | reverse %}
+  <a class="diario-card" href="{{ post.url | replace('/diario/', '') }}">
+    <span class="date">{{ post.date | dateFmt }}</span>
+    <h3>{{ post.data.title }}</h3>
+    <span class="tags">{{ post.data.tags | join(' · ') }}</span>
+    {% if post.data.excerpt %}<p>{{ post.data.excerpt }}</p>{% endif %}
+  </a>
+  {% endfor %}
+</div>

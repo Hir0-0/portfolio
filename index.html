@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio &middot; Diário Criativo</title>
+  <meta name="description" content="Ilustrador, produtor, desenvolvedor e consultor. Portfólio experimental construtivista." />
+  <meta property="og:title" content="Portfolio &middot; Diário Criativo" />
+  <meta property="og:description" content="Ilustrador, produtor, desenvolvedor e consultor." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Science+Gothic:opsz,wdth,wght,YOPQ@8..144,25..151,100..900,25..135&family=JetBrains+Mono:wght@400;700&display=swap" />
+
+  <link rel="stylesheet" href="shared/css/theme.css" />
+  <link rel="stylesheet" href="shared/css/base.css" />
+  <link rel="stylesheet" href="shared/css/loading.css" />
+  <link rel="stylesheet" href="shared/css/terminal.css" />
+  <link rel="stylesheet" href="shared/css/layout.css" />
+
+  <script src="shared/js/utils.js"></script>
+  <script src="shared/js/loading.js"></script>
+  <script src="shared/js/theme-toggle.js" defer></script>
+  <script src="shared/js/menu.js" defer></script>
+  <script src="shared/js/background-2d.js" defer></script>
+  <script src="shared/js/background-3d.js" defer></script>
+  <script src="shared/js/background-switch.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-logo" href="index.html">// PORT<span>FOLIO</span>_</a>
+    <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">≡</button>
+    <nav class="site-nav" aria-label="Principal">
+      <a href="index.html">Home</a>
+      <a href="galeria.html">Galeria</a>
+      <a href="beats.html">Beats</a>
+      <a href="prototipos.html">Protótipos</a>
+      <a href="consultoria.html">Serviços</a>
+      <a href="diario/">Diário</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero__inner">
+        <div class="hero__eyebrow prompt mono">sessão iniciada // bem-vindo</div>
+        <h1 class="hero__title">
+          <span class="glitch" data-text="ATELIÊ_">ATELIÊ_</span><br />
+          <span class="glitch" data-text="DIGITAL">DIGITAL</span>
+        </h1>
+        <p class="hero__sub">
+          <b>Ilustrador</b> &middot; <b>Produtor</b> &middot; <b>Desenvolvedor</b> &middot; <b>Consultor</b>.
+          Um caderno experimental onde código, traço e ritmo se sobrepõem.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="galeria.html">Ver Galeria →</a>
+          <a class="btn" href="consultoria.html">Serviços</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© <span id="y"></span> · feito à mão · construtivismo digital</p>
+    <script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+  </footer>
+</body>
+</html>
