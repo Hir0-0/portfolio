@@ -41,9 +41,9 @@
     for (let i = 0; i < 14; i++) {
       const mat = new THREE.MeshBasicMaterial({
         color: colors[i % colors.length],
-        wireframe: true,
+        wireframe: false,
         transparent: true,
-        opacity: 0.55
+        opacity: 0.8
       });
       const m = new THREE.Mesh(geos[i % geos.length], mat);
       m.position.set((Math.random() - 0.5) * 22, (Math.random() - 0.5) * 14, (Math.random() - 0.5) * 10);
