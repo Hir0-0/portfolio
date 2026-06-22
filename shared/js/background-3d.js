@@ -11,7 +11,7 @@
     if (!window.THREE) {
       await new Promise((res, rej) => {
         const s = document.createElement("script");
-        s.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
+        s.src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js";
         s.onload = res; s.onerror = rej;
         document.head.appendChild(s);
       });
