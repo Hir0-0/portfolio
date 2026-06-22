@@ -14,7 +14,7 @@
 
   function makeShapes() {
     const colors = palette();
-    const count = Math.min(28, Math.floor((w * h) / 28000));
+    const count = Math.min(60, Math.floor((w * h) / 18000));
     shapes = [];
     for (let i = 0; i < count; i++) {
       shapes.push({
@@ -27,7 +27,7 @@
         vy: (Math.random() - 0.5) * 0.25,
         rot: Math.random() * Math.PI,
         rotSpeed: (Math.random() - 0.5) * 0.005,
-        alpha: 0.45 + Math.random() * 0.35
+        alpha: 0.70 + Math.random() * 0.30
       });
     }
   }
@@ -46,9 +46,9 @@
         const dx = s.x - mouse.x;
         const dy = s.y - mouse.y;
         const d2 = dx * dx + dy * dy;
-        const max = 200 * 200;
+        const max = 350 * 350;
         if (d2 < max) {
-          const f = (1 - d2 / max) * 0.6;
+          const f = (1 - d2 / max) * 2.0;
           s.x += (dx / Math.sqrt(d2 || 1)) * f;
           s.y += (dy / Math.sqrt(d2 || 1)) * f;
         }
