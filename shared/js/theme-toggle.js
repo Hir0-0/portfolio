@@ -10,7 +10,7 @@
     const btn = document.createElement("button");
     btn.className = "theme-toggle";
     btn.setAttribute("aria-label", "Alternar tema");
-    document.body.appendChild(btn);
+    document.querySelector(".site-header").appendChild(btn);
 
     const render = () => {
       const t = document.documentElement.getAttribute("data-theme");
