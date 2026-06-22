@@ -27,7 +27,7 @@
         vy: (Math.random() - 0.5) * 0.25,
         rot: Math.random() * Math.PI,
         rotSpeed: (Math.random() - 0.5) * 0.005,
-        alpha: 0.18 + Math.random() * 0.25
+        alpha: 0.45 + Math.random() * 0.35
       });
     }
   }
