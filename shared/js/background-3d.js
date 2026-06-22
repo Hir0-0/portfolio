@@ -46,7 +46,7 @@
         opacity: 0.8
       });
       const m = new THREE.Mesh(geos[i % geos.length], mat);
-      m.position.set((Math.random() - 0.5) * 22, (Math.random() - 0.5) * 14, (Math.random() - 0.5) * 10);
+      m.position.set((Math.random() - 0.5) * 12, (Math.random() - 0.5) * 8, (Math.random() - 0.5) * 6);
       m.userData = {
         rs: { x: (Math.random() - 0.5) * 0.01, y: (Math.random() - 0.5) * 0.01 }
       };
@@ -73,11 +73,11 @@
     for (const o of objs) {
       o.rotation.x += o.userData.rs.x;
       o.rotation.y += o.userData.rs.y;
-      o.position.x += (mouse.x * 0.05 - o.position.x * 0.001);
-      o.position.y += (mouse.y * 0.05 - o.position.y * 0.001);
+      o.position.x += (mouse.x * 0.25 - o.position.x * 0.003);
+      o.position.y += (mouse.y * 0.25 - o.position.y * 0.003);
     }
-    camera.position.x += (mouse.x * 1.5 - camera.position.x) * 0.04;
-    camera.position.y += (mouse.y * 1.5 - camera.position.y) * 0.04;
+    camera.position.x += (mouse.x * 4 - camera.position.x) * 0.08;
+    camera.position.y += (mouse.y * 4 - camera.position.y) * 0.08;
     camera.lookAt(0, 0, 0);
     renderer.render(scene, camera);
   }
