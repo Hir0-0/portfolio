@@ -22,14 +22,16 @@ footer {
 }
 
 .site-logo {
-  font-family: "JetBrains Mono", "Science Gothic", monospace;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  color: var(--fg);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
-.site-logo span { color: var(--accent); }
+
+.site-logo img {
+  height: 48px;
+  width: auto;
+  display: block;
+}
 
 .site-nav {
   display: flex;
