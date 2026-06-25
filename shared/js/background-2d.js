@@ -91,7 +91,8 @@
   }
 
   function attach() {
-    if (LV.isMobile()) return;
+    if (canvas) return;
+     if (LV.isMobile()) return;
     canvas = document.createElement("canvas");
     canvas.id = "bg-canvas";
     document.body.appendChild(canvas);
@@ -106,8 +107,15 @@
   }
   function detach() {
     if (raf) cancelAnimationFrame(raf);
-    if (canvas) canvas.remove();
-    canvas = null;
+
+  window.removeEventListener("resize", resize);
+
+  if (canvas) {
+    canvas.remove();
+  }
+
+  canvas = null;
+  ctx = null;
   }
 
   window.LVBg2D = { attach, detach };
