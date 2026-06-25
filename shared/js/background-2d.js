@@ -92,7 +92,10 @@
 
   function attach() {
     if (canvas) return;
-     if (LV.isMobile()) return;
+    if (document.getElementById("bg-canvas")) {
+    return;
+  }
+    if (LV.isMobile()) return;
     canvas = document.createElement("canvas");
     canvas.id = "bg-canvas";
     document.body.appendChild(canvas);
