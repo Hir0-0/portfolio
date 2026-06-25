@@ -7,6 +7,10 @@
   const mouse = { x: 0, y: 0 };
 
   async function attach() {
+    if (document.getElementById("bg-canvas-3d")) {
+    return;
+  }
+
     if (LV.isMobile()) return;
     if (!window.THREE) {
       await new Promise((res, rej) => {
