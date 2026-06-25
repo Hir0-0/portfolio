@@ -19,12 +19,44 @@ document.addEventListener("DOMContentLoaded", () => {
   `;
   document.body.appendChild(sw);
 
-  function set(m) {
-    LV.storage.set("lv-bg", m);
-    sw.querySelectorAll("button").forEach(b => b.classList.toggle("is-active", b.dataset.mode === m));
-    if (m === "2d") { window.LVBg3D && LVBg3D.detach(); window.LVBg2D && LVBg2D.attach(); }
-    else            { window.LVBg2D && LVBg2D.detach(); window.LVBg3D && LVBg3D.attach(); }
+ let currentMode = null;
+
+function set(m) {
+
+  if (m === currentMode) {
+    return;
   }
+
+  currentMode = m;
+
+  LV.storage.set("lv-bg", m);
+
+  sw.querySelectorAll("button").forEach(b =>
+    b.classList.toggle("is-active", b.dataset.mode === m)
+  );
+
+  if (m === "2d") {
+
+    if (window.LVBg3D) {
+      LVBg3D.detach();
+    }
+
+    if (window.LVBg2D) {
+      LVBg2D.attach();
+    }
+
+  } else {
+
+    if (window.LVBg2D) {
+      LVBg2D.detach();
+    }
+
+    if (window.LVBg3D) {
+      LVBg3D.attach();
+    }
+
+  }
+}
   sw.addEventListener("click", (e) => {
     const b = e.target.closest("button");
     if (b) set(b.dataset.mode);
